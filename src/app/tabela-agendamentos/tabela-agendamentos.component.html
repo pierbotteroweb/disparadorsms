@@ -1,0 +1,37 @@
+<div fxLayout="column">
+    <div *ngIf="listaAgendamentos" fxFlex=50>
+        <p class="titulo-tabela">Lista de Agendamentos</p>
+        <p-table [value]="listaAgendamentos" 
+                selectionMode="single" 
+                [(selection)]="agendamentoSelecionado" 
+                (onRowSelect)="registroSelecionado($event)" 
+                (onRowUnselect)="registroDescelecionado($event)"
+                [scrollable]="true" scrollHeight="30vh"
+                dataKey="id">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th>Data de disparo</th>
+                <th>Hora de disparo</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-agendamento>
+            <tr [pSelectableRow]="agendamento">
+                <td>{{agendamento.nome}}</td>
+                <td>{{agendamento.telefone}}
+                    <span class="avisoddd" *ngIf="agendamento.telefone | localOnly">{{mensagemPadrao('cobrancaForaEstado',true)}}</span>
+                </td>
+                <td>{{agendamento.data | date: 'dd/MM/yyyy' }}</td>
+                <td>{{agendamento.hora}}</td>
+            </tr>
+        </ng-template>
+        </p-table>
+    </div>
+
+  
+    <div  fxFlex=40>
+      <app-tabela-novos-contatos></app-tabela-novos-contatos>
+    </div>
+
+</div>

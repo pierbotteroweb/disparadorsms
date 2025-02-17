@@ -1,0 +1,23 @@
+<div class="container" 
+     fxLayout="row" 
+     fxLayout.xs="column"  
+     fxLayoutAlign="space-evenly start">
+
+    <div fxFlex="50" 
+         fxFlex.md="100" 
+         class="padding05rem">         
+ 
+        <app-painel (exibeAgendamentosEmmiter)="exibeAgendamentos($event)"
+                    [registroRecebido]="registroRecebido" >
+        </app-painel>      
+    </div>
+
+    <!-- BLOCO DE TABELAS -->
+    <div fxFlex="50"  
+         fxFlex.md="100" 
+         *ngIf="agendamentos"  
+         class="padding05rem">
+      <router-outlet></router-outlet>        
+    </div>
+  </div>
+  

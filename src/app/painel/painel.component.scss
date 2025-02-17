@@ -1,0 +1,122 @@
+// PALETA DE CORES
+
+$verde: #28a745;
+$amarelo: #ffc107;
+$vermelho: #f44336;
+$textobranco: #edeff1;
+$branco: #fff;
+$azul:#3f51b5;
+
+// DIMENSÕES PADRONIZADAS
+
+$larguraBotao:190px;
+
+mat-card{
+    background: $textobranco;
+    margin-top: 10px;
+}
+mat-error{
+    display: inline-block;
+    padding: 0;
+}
+
+::ng-deep .mat-form-field-outline{
+    background: $branco;
+    border-radius: 5px;    
+}
+
+::ng-deep .mat-card-actions,
+::ng-deep .mat-card-header-text{
+    margin: 0 !important;
+}
+
+::ng-deep mat-error{
+    text-align: center;
+    font-weight: bold;
+    padding: 10px;
+}
+
+
+.button{    
+    &-salvar{
+        width: $larguraBotao;
+        background: $verde;
+        color:$textobranco;
+        width: 100%;
+    }
+    &-agendamentos{
+        width: $larguraBotao;
+        background: $amarelo;
+        width: 100%;
+    }
+    &-deletar{
+        width: $larguraBotao;
+        background: $vermelho;
+        color:$textobranco;
+        width: 100%;
+    }
+}
+
+.button-salvar-wrapper{
+    button > span.mat-button-wrapper{
+        padding-left: 24px;
+    }
+}
+
+
+.button-upload-wrapper {
+    position: relative;
+    overflow: hidden; 
+    display: inline-block;
+    border-color: transparent !important;
+
+    .mat-icon{
+      position: absolute;
+      top: 6px;
+    }
+  
+    input[type=file],
+    input[type=file]::-webkit-file-upload-button  {
+        cursor: pointer; 
+      font-size: 20px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+    }
+  
+    .button-upload { 
+      width: 100%;
+      cursor: pointer !important;
+      border-color: transparent !important;
+      color: $textobranco;
+      background-color: $azul;
+      padding: 7.665px 32px 7.665px 22px;
+      border-radius: 5px;
+      font-family: Roboto, "Helvetica Neue", sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 
+                  0px 2px 2px 0px rgb(0 0 0 / 14%), 
+                  0px 1px 5px 0px rgb(0 0 0 / 12%);
+    }
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+    background: none;
+}
+
+.erro-registro-salvo{
+    display: block;
+    padding-top: 5px;
+}
+
+.sucesso-registro-salvo{
+    display: block;
+    padding-top: 5px;
+    color: $verde;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+}
+  

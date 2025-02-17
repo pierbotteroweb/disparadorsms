@@ -1,0 +1,231 @@
+    <mat-card  [formGroup]="painelFormGroup" >  
+        <mat-card-header>
+          <mat-card-title>Agendador de Disparos SMS</mat-card-title>
+          <mat-card-subtitle>Preencha abaixo para fazer o agendamento</mat-card-subtitle>
+        </mat-card-header>
+        
+        <mat-card-content>
+          <div fxLayout="column" 
+               fxLayoutGap="10px">
+  
+            <div fxLayout="row"  
+                 fxLayoutGap="10px" 
+                 fxLayoutAlign="space-between center">
+
+                 <!-- CAMPO NOME -->
+                <mat-form-field appearance="outline" fxFlex="50">
+                  <mat-label>Nome </mat-label>
+                  <input matInput placeholder="Nome"
+                  formControlName="nomeFormControl" />
+                  <mat-error *ngIf="camposPendentes&&nomeFormControl.errors?.required">
+                    {{mensagemPadrao('campoObrigatorio')}}
+                  </mat-error> 
+                  <mat-error *ngIf="camposPendentes&&nomeFormControl.errors?.minlength">
+                    {{mensagemPadrao('minimoCaracteres',nomeFormControl.errors?.minlength.requiredLength)}}
+                  </mat-error> 
+                  <mat-error *ngIf="camposPendentes&&nomeFormControl.errors?.maxlength">
+                    {{mensagemPadrao('maximoCaracteres',nomeFormControl.errors?.maxlength.requiredLength)}}
+                  </mat-error> 
+
+                  <mat-icon matSuffix>perm_identity</mat-icon>
+                </mat-form-field>
+
+                <!-- CAMPO SOBRENOME                 -->
+                <mat-form-field appearance="outline" fxFlex="50">
+                  <mat-label>Sobrenome</mat-label>
+                  <input matInput placeholder="Sobrenome"
+                  formControlName="sobrenomeFormControl" />
+                  <mat-error *ngIf="camposPendentes&&sobrenomeFormControl.errors?.required">
+                    {{mensagemPadrao('campoObrigatorio')}}
+                  </mat-error> 
+                  <mat-error *ngIf="camposPendentes&&sobrenomeFormControl.errors?.minlength">
+                    {{mensagemPadrao('minimoCaracteres',sobrenomeFormControl.errors?.minlength.requiredLength)}}
+                  </mat-error> 
+                  <mat-error *ngIf="camposPendentes&&sobrenomeFormControl.errors?.maxlength">
+                    {{mensagemPadrao('maximoCaracteres',sobrenomeFormControl.errors?.maxlength.requiredLength)}}
+                  </mat-error> 
+
+                  <mat-icon matSuffix>people_alt</mat-icon>
+                  <mat-hint>Sobrenome</mat-hint>
+                </mat-form-field>
+
+            </div><!--  row-end   -->
+  
+            <div fxLayout="row"  
+                 fxLayoutGap="10px" 
+                 fxLayoutAlign="space-between center">   
+
+                <!-- CAMPO DATA DE DISPARO -->
+                <mat-form-field appearance="outline" fxFlex="50">
+                  <mat-label>Data de disparo</mat-label>
+                  <input matInput [matDatepicker]="picker"
+                         (focus)="picker.open()"
+                         formControlName="dataFormControl"/>
+                         <mat-error *ngIf="camposPendentes&&dataFormControl.errors?.required">
+                           {{mensagemPadrao('campoObrigatorio')}}
+                         </mat-error>
+
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+                <!-- CAMPO HORA DE DISPARO -->              
+                <mat-form-field appearance="outline" fxFlex="50">
+                  <mat-label>Hora de disparo</mat-label>
+                  <input
+                    matInput type="time"
+                    placeholder="Hora do Disparo"
+                    formControlName="horaFormControl"/>
+                    <mat-icon matSuffix>schedule</mat-icon>
+                    <mat-error *ngIf="camposPendentes&&horaFormControl.errors?.required">
+                      {{mensagemPadrao('horaFormControl')}}
+                    </mat-error> 
+  
+                </mat-form-field>
+            </div><!--  row-end   -->
+  
+            <div fxLayout="row"  
+                 fxLayoutGap="10px" 
+                 fxLayoutAlign="space-between center">
+
+                <!-- TELEFONE DE DISPARO -->
+                <mat-form-field appearance="outline" fxFlex="50">
+                  <mat-label>Telefone de disparo</mat-label>
+                  <input
+                    matInput
+                    [textMask]="{ mask: phonemask }"
+                    placeholder="Informe número de celular"
+                    formControlName="telefone1FormControl"/>
+                    <mat-icon matSuffix>phone_iphone</mat-icon>
+                    <mat-error *ngIf="camposPendentes&&telefone1FormControl.errors?.required">
+                      {{mensagemPadrao('campoObrigatorio')}}
+                    </mat-error> 
+                    <mat-error *ngIf="camposPendentes&&telefone1FormControl.errors?.minlength">
+                      {{mensagemPadrao('minimoCaracteres',telefone1FormControl.errors?.minlength.requiredLength)}}
+                    </mat-error> 
+                    <mat-error *ngIf="camposPendentes&&telefone1FormControl.errors?.maxlength">
+                      {{mensagemPadrao('maximoCaracteres',telefone1FormControl.errors?.maxlength.requiredLength)}}
+                    </mat-error> 
+                    <mat-error *ngIf="camposPendentes&&telefone1FormControl.errors?.onlyLocal">
+                      {{mensagemPadrao('cobrancaForaEstado',telefone1FormControl.errors?.onlyLocal)}}
+                    </mat-error> 
+                </mat-form-field>
+
+                <!-- TELEFONE ALTERNATIVO -->
+                <mat-form-field appearance="outline"  fxFlex="50">
+                  <mat-label>Telefone alternativo</mat-label>
+                  <input
+                    matInput
+                    [textMask]="{ mask: phonemask }"
+                    placeholder="Informe número de celular"
+                    formControlName="telefone2FormControl"/>
+                    <mat-icon matSuffix>smartphone</mat-icon>
+                    <mat-error *ngIf="camposPendentes&&telefone2FormControl.errors?.required">
+                      {{mensagemPadrao('campoObrigatorio')}}
+                    </mat-error> 
+                    <mat-error *ngIf="camposPendentes&&telefone2FormControl.errors?.minlength">
+                      {{mensagemPadrao('minimoCaracteres',telefone2FormControl.errors?.minlength.requiredLength)}}
+                    </mat-error> 
+                    <mat-error *ngIf="camposPendentes&&telefone2FormControl.errors?.maxlength">
+                      {{mensagemPadrao('maximoCaracteres',telefone2FormControl.errors?.maxlength.requiredLength)}}
+                    </mat-error> 
+                    <mat-error *ngIf="camposPendentes&&telefone2FormControl.errors?.onlyLocal">
+                      {{mensagemPadrao('cobrancaForaEstado',telefone2FormControl.errors?.onlyLocal)}}
+                    </mat-error> 
+                </mat-form-field>
+
+            </div><!--  row-end   -->
+
+  
+            <div fxLayout="row" 
+                 fxLayoutGap="10px">
+                 
+                 <!-- MENSAGEM ENVIADA NO DISPARO -->
+                 <mat-form-field appearance="outline"  
+                                 fxFlex="100">
+                  <mat-label>Mensagem</mat-label>
+                  <textarea matInput placeholder="Mensagem" 
+                      formControlName="mensagemFormControl" 
+                      style="min-height: 50px;" >
+                   </textarea>
+                  <mat-hint>Entre 10 e 160 caracteres</mat-hint>
+                  <mat-error *ngIf="camposPendentes&&mensagemFormControl.errors?.required">
+                    {{mensagemPadrao('campoObrigatorio')}}
+                  </mat-error> 
+                  <mat-error *ngIf="camposPendentes&&mensagemFormControl.errors?.minlength">
+                    {{mensagemPadrao('minimoCaracteres',mensagemFormControl.errors?.minlength.requiredLength)}}
+                  </mat-error> 
+                  <mat-error *ngIf="camposPendentes&&mensagemFormControl.errors?.maxlength">
+                    {{mensagemPadrao('maximoCaracteres',mensagemFormControl.errors?.maxlength.requiredLength)}}
+                  </mat-error> 
+                 </mat-form-field>
+
+            </div><!--  row-end   -->
+
+
+            <div fxLayout="row" 
+                 fxLayout.xs="column"
+                 fxLayoutGap="10px">
+
+                 <!-- BOTÃO SALVAR/ATUALIZAR AGENDAMENTO -->
+                <div fxFlex="33" >
+                  <button mat-raised-button class="button-salvar" 
+                          (click)="salvaAgendamento()">
+                          {{modoEdicao?"Atualiza Agendamento":"Salvar Agendamento"}}        
+                          <mat-icon matSuffix>
+                            {{modoEdicao?"edit":"save"}}                  
+                          </mat-icon>
+                  </button>
+                  <mat-error *ngIf="camposPendentes" class="erro-registro-salvo" >{{mensagemPadrao('camposPendentes')}}</mat-error>
+                  <mat-hint *ngIf="registroSalvoComSucesso" class="sucesso-registro-salvo">
+                    {{mensagemPadrao('sucessoDisparo')}}
+                  </mat-hint>
+                </div>
+
+                
+                <div fxFlex="33">   
+                  <!-- BOTÃO EXIBIR/OCULTAR AGENDAMENTOS -->     
+                  <button mat-raised-button  class="button-agendamentos"
+                          *ngIf="!modoEdicao" (click)="toggleAgendamentos()">
+                          {{exibeAgendamentos?"Ocultar Agendamentos":"Exibir Agendamentos"}}  
+                          <mat-icon matSuffix>toc</mat-icon>
+                  </button>
+
+                  <!-- BOTÃO EXCLUIR AGENDAMENTOS           -->
+                  <button mat-raised-button class="button-deletar"
+                          *ngIf="modoEdicao" (click)="deletarAgendamento()">
+                          Excluir Agendamento
+                          <mat-icon matSuffix>delete_outline</mat-icon>
+                  </button>
+                </div>
+
+                <div fxFlex="33"  *ngIf="modoEdicao"
+                     class="button-salvar-wrapper">
+                  <!-- BOTÃO SALVAR NOVO AGENDAMENTO COM 
+                  DADOS DE REGISTRO SELECIONADO -->
+                  <button mat-raised-button
+                          class="button-salvar"
+                          (click)="salvaAgendamento('novo')">
+                          Salvar Como Novo
+                          <mat-icon matSuffix>save</mat-icon>
+                  </button>
+
+                </div>
+
+                <div fxFlex="33"  *ngIf="!modoEdicao&&exibeAgendamentos"
+                     class="button-upload-wrapper">
+                     
+                     <!-- BOTÃO PARA UPLOAD DE
+                     PLAILHA CSV DE CONTATOS -->
+                    <button class="button-upload">
+                            Upload CSV
+                            <mat-icon matSuffix>file_upload</mat-icon>
+                    </button>
+                    <!-- INPUT TYPE FILE OCULTO POR ESTILIZAÇÃO -->
+                    <input type="file" (change)="uploadCSV($event)" />
+                </div>
+
+            </div>
+          </div><!--  column-end   -->
+      </mat-card-content>
+      </mat-card>

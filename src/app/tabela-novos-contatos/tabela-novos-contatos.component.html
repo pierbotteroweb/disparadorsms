@@ -1,0 +1,23 @@
+<p  class="titulo-tabela" *ngIf="listaNovosContatos">Contatos Importados</p>
+<p-table [value]="listaNovosContatos" 
+        selectionMode="single" 
+        [(selection)]="contatoSelecionado" 
+        (onRowSelect)="selecionaContato($event)" 
+        (onRowUnselect)="deselecionaContato($event)"
+        [scrollable]="true" scrollHeight="30vh" 
+    *ngIf="listaNovosContatos">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th>Telefone Alt</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-contato>
+            <tr [pSelectableRow]="contato">
+                <td>{{contato.nome}}</td>
+                <td>{{contato.telefone1}}</td>
+                <td>{{contato.telefone2}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
